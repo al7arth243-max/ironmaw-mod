@@ -2,7 +2,9 @@ package com.ironmaw.mod.entity;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Wolf;
@@ -76,6 +78,35 @@ public class IronmawEntity extends Wolf implements GeoEntity {
         this.addAdditionalSaveData(tag);
         tag.putByte("CollarColor", (byte) color.getId());
         this.readAdditionalSaveData(tag);
+    }
+
+    /**
+     * Vanilla wolves turn their body mostly by walking. The Ironmaw is big enough to bite from where it
+     * stands, so without this it would attack sideways. While it has a target, swing the whole body
+     * (and head) to face it, up to 30 degrees per tick.
+     */
+    @Override
+    public void tick() {
+        super.tick();
+        if (this.isInSittingPose()) return;
+
+        if (!this.level().isClientSide) {
+            LivingEntity target = this.getTarget();
+            if (target != null && target.isAlive()) {
+                double dx = target.getX() - this.getX();
+                double dz = target.getZ() - this.getZ();
+                if (dx * dx + dz * dz > 1.0E-4D) {
+                    float wanted = (float) (Mth.atan2(dz, dx) * Mth.RAD_TO_DEG) - 90.0F;
+                    float yaw = Mth.approachDegrees(this.getYRot(), wanted, 30.0F);
+                    this.setYRot(yaw);
+                    this.yBodyRot = yaw;
+                    this.yHeadRot = yaw;
+                }
+            }
+        } else if (this.isAggressive()) {
+            // Client side: the target isn't known here, but the head direction is synced, so turn the body after it
+            this.yBodyRot = Mth.approachDegrees(this.yBodyRot, this.yHeadRot, 30.0F);
+        }
     }
 
     @Override
