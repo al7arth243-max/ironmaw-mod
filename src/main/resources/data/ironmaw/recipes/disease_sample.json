@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "FBF",
+    "BEB",
+    "FBF"
+  ],
+  "key": {
+    "F": { "item": "minecraft:rotten_flesh" },
+    "B": { "item": "minecraft:bone" },
+    "E": { "item": "minecraft:spider_eye" }
+  },
+  "result": {
+    "item": "ironmaw:disease_sample",
+    "count": 1
+  }
+}

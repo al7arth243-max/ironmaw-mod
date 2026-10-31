@@ -1,0 +1,34 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="ironmaw"
+version="1.0.0"
+displayName="Ironmaw"
+authors="worthyjoker"
+description='''
+Craft a Disease Sample and use it on your tamed wolf to turn it into an Ironmaw:
+a bigger, tougher, hard-hitting hound that still sits and follows you like a normal wolf.
+'''
+
+[[dependencies.ironmaw]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.ironmaw]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.20.2)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.ironmaw]]
+    modId="geckolib"
+    mandatory=true
+    versionRange="[4.4,4.5)"
+    ordering="AFTER"
+    side="BOTH"

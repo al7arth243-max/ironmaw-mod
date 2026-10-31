@@ -1,0 +1,8 @@
+{
+  "item.ironmaw.disease_sample": "Disease Sample",
+  "item.ironmaw.disease_sample.tooltip": "Use on your tamed wolf to transform it into an Ironmaw",
+  "item.ironmaw.ironmaw_spawn_egg": "Ironmaw Spawn Egg",
+  "entity.ironmaw.ironmaw": "Ironmaw",
+  "message.ironmaw.not_your_wolf": "The sample only works on a wolf you have tamed",
+  "message.ironmaw.too_young": "This pup is too young to survive the infection"
+}
